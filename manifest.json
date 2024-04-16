@@ -3,7 +3,7 @@
   "name": "Tab Extensions",
   "description": "Base Level Extension",
   "version": "1.0",
-  "side_panel": {
-    "default_path": "sidepanel.html"
+  "action": {
+    "default_popup": "hello.html",
   }
 }
