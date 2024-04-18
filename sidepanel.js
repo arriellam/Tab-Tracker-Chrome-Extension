@@ -22,7 +22,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 const span = document.createElement('span');
                 span.className = 'session-name';
                 span.textContent = tab.title || 'No Title'; // Safe fallback for no title
+                // span.textContext += tab.url;
                 infoDiv.appendChild(span);
+
+                const urlSpan = document.createElement('span');
+                urlSpan.className = 'tab-url';
+                urlSpan.textContent = tab.url;
+                // urlSpan.style.display = 'none'; // Initially hidden
+                infoDiv.appendChild(urlSpan);
 
                 li.appendChild(infoDiv);
 

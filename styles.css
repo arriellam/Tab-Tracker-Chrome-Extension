@@ -91,7 +91,23 @@ button:hover {
 .session-info {
     display: flex;
     align-items: center;
+    justify-content: space-between; /*new*/
 }
+
+.session-name {
+    flex-grow: 1;
+}
+
+.tab-url {
+    flex-grow: 2;
+    color: #666;  /* Dark grey color for URL */
+    display: none;  /* Hide the URL by default */
+}
+
+.session:hover .tab-url {
+    display: block;  /* Show the URL on hover */
+}
+
 
 
 
