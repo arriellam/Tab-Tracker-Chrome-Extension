@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const span = document.createElement('span');
                 span.className = 'session-name';
                 span.textContent = tab.title || 'No Title'; // Safe fallback for no title
-                // span.textContext += tab.url;
                 infoDiv.appendChild(span);
 
                 const idSpan = document.createElement('span');
@@ -30,12 +29,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 idSpan.textContent = tab.id; // Set tab ID as its text content
                 idSpan.style.display = 'none'; 
                 infoDiv.appendChild(idSpan);
+                
+                const aLink = document.createElement('a');
+                aLink.className = 'tab-url';
 
-                const urlSpan = document.createElement('span');
-                urlSpan.className = 'tab-url';
-                urlSpan.textContent = tab.url;
-                // urlSpan.style.display = 'none'; // Initially hidden
-                infoDiv.appendChild(urlSpan);
+                // hyperlink
+                aLink.href = '#'; // Placeholder, as the actual navigation is handled by script
+                // aLink.textContent = tab.url; // Display the URL
+                const maxLength = 30; // Maximum length of displayed URL
+                let displayUrl = tab.url.length > maxLength ? tab.url.substring(0, maxLength) + '...' : tab.url;
+                aLink.textContent = displayUrl; // Display the truncated URL
+                aLink.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent default anchor click behavior
+                    chrome.tabs.update(tab.id, {active: true}); // Focus the tab
+                });
+                
+                infoDiv.appendChild(aLink);
 
                 li.appendChild(infoDiv);
 

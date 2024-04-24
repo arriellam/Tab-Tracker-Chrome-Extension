@@ -101,6 +101,9 @@ button:hover {
 .tab-url {
     flex-grow: 2;
     color: #666;  /* Dark grey color for URL */
+    white-space: normal; /* Allow wrapping */
+    word-break: break-word; /* Break the word at the limit of the container */
+    overflow: hidden; /* Hide overflow */
     display: none;  /* Hide the URL by default */
 }
 
