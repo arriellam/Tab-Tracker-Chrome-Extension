@@ -111,6 +111,17 @@ button:hover {
     display: block;  /* Show the URL on hover */
 }
 
+.window-group {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.window-group h2 {
+    color: #333;
+    margin-top: 0;
+}
 
 
 
