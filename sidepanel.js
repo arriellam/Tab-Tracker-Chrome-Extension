@@ -2,6 +2,29 @@
 // // they display as a list)
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Get reference to the search input element
+    const searchInput = document.getElementById('searchSessions');
+
+    // Function to filter tabs based on search input
+    function filterTabs(searchText) {
+        const tabs = document.querySelectorAll('.session');
+        tabs.forEach(tab => {
+            const tabTitle = tab.querySelector('.session-name').textContent.toLowerCase();
+            const tabUrl = tab.querySelector('.tab-url').textContent.toLowerCase();
+            if (tabTitle.includes(searchText) || tabUrl.includes(searchText)) {
+                tab.style.display = ''; // Show tab if it matches search text
+            } else {
+                tab.style.display = 'none'; // Hide tab if it doesn't match search text
+            }
+        });
+    }
+
+    // Event listener for input event on the search input
+    searchInput.addEventListener('input', function() {
+        const searchText = searchInput.value.toLowerCase();
+        filterTabs(searchText);
+    });
+    
     function updateTabList() {
         chrome.tabs.query({}, function(tabs) {
             const listElement = document.getElementById('tabsList');
