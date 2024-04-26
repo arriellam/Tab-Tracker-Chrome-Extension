@@ -1,6 +1,11 @@
-// // function to get all open tabs and dynamically generate html so that
-// // they display as a list)
+// Opens the side panel when the extension icon is clicked
+chrome.sidePanel
+    .setPanelBehavior({ openPanelOnActionClick: true })
+    .catch((error) => console.error(error));
 
+
+// function to get all open tabs and dynamically generate html so that
+// they display as a list)
 document.addEventListener('DOMContentLoaded', function() {
     // Get reference to the search input element
     const searchInput = document.getElementById('searchSessions');
@@ -101,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
     updateTabList();
     chrome.tabs.onCreated.addListener(updateTabList);
     chrome.tabs.onRemoved.addListener(updateTabList);
+    chrome.tabs.onUpdated.addListener(updateTabList);
 
     document.getElementById('selectAllInactive').addEventListener('click', function() {
         const checkboxes = document.querySelectorAll('.session:not(:first-child) .tab-select');
