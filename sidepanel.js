@@ -9,6 +9,12 @@ chrome.sidePanel
 document.addEventListener('DOMContentLoaded', function() {
     // Get reference to the search input element
     const searchInput = document.getElementById('searchSessions');
+    // Store checkbox states for each tab
+    const checkboxStates = {}; 
+    // Store last active times for each tab
+    const lastActiveTimes = {};
+    
+    
 
     // Function to filter tabs based on search input
     function filterTabs(searchText) {
@@ -31,8 +37,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     function updateTabList() {
+        // maintain checkbox states
+        getCheck();
+        const listElement = document.getElementById('tabsList');
         chrome.tabs.query({}, function(tabs) {
-            const listElement = document.getElementById('tabsList');
             listElement.innerHTML = ''; // Clear existing list items
 
             // Group tabs by windowId
@@ -56,14 +64,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 windows[windowId].forEach(tab => {
                     const li = document.createElement('li');
                     li.className = 'session';
-                    li.style.backgroundColor = tab.active ? 'lightgreen' : 'lightred';
-
+                   
                     const infoDiv = document.createElement('div');
                     infoDiv.className = 'session-info';
 
                     const checkbox = document.createElement('input');
                     checkbox.type = 'checkbox';
                     checkbox.className = 'tab-select';
+                    checkbox.checked = checkboxStates[tab.id] || false;
                     infoDiv.appendChild(checkbox);
 
                     const span = document.createElement('span');
@@ -89,6 +97,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                     infoDiv.appendChild(aLink);
 
+                    // updated color based on time threshold
+                    const minutesSinceLastAccess = calculateTimeDifference(tab);
+                    if ((minutesSinceLastAccess < 1)) {
+                        li.style.backgroundColor = 'lightgreen' 
+                    } else {
+                        li.style.backgroundColor = 'lightcoral';
+                    }
+
                     li.appendChild(infoDiv);
 
                     const actionsDiv = document.createElement('div');
@@ -100,13 +116,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 listElement.appendChild(windowDiv);
             });
+            filterTabs(searchInput.value.toLowerCase());
+        });
+    }
+    
+    // Function to calculate time difference between current time and last accessed time
+    function calculateTimeDifference(tab) {
+        const tabId = tab.id;
+        const currentTime = new Date();
+        if (tab.active) {
+            lastActiveTimes[tabId] = currentTime;
+        }
+        // If no last active time recorded, use lassed accessed time
+        const lastActiveTime = lastActiveTimes[tabId] || new Date(tab.lastAccessed);
+        const timeDiff = currentTime.getTime() - lastActiveTime.getTime();
+        return Math.floor(timeDiff / (1000 * 60));
+    }
+
+    function getCheck() {
+        const listElement = document.getElementById('tabsList');
+        // Loop through existing checkboxes to store their states
+        listElement.querySelectorAll('.tab-select').forEach(function(checkbox) {
+            const tabId = checkbox.closest('.session').querySelector('.tab-id').textContent;
+            checkboxStates[tabId] = checkbox.checked;
         });
     }
 
-    updateTabList();
-    chrome.tabs.onCreated.addListener(updateTabList);
-    chrome.tabs.onRemoved.addListener(updateTabList);
-    chrome.tabs.onUpdated.addListener(updateTabList);
+    function continouslyUpdate() {
+        updateTabList();
+        setTimeout(continouslyUpdate, 1000);
+    }
+     
+    continouslyUpdate();
+
+    chrome.tabs.onActivated.addListener(function(activeInfo) {
+        const tabId = activeInfo.tabId;
+        lastActiveTimes[tabId] = new Date();
+    });
 
     document.getElementById('selectAllInactive').addEventListener('click', function() {
         const checkboxes = document.querySelectorAll('.session:not(:first-child) .tab-select');
