@@ -166,6 +166,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    document.getElementById('deselectAll').addEventListener('click', function() {
+        const checkboxes = document.querySelectorAll('.session');
+        checkboxes.forEach(function(box) {
+            box.querySelector('.tab-select').checked = false;
+        });
+    });
+
     document.getElementById('deleteSelected').addEventListener('click', function() {
         const selectedTabs = document.querySelectorAll('.session .tab-select:checked');
         selectedTabs.forEach(function(box) {

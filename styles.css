@@ -4,13 +4,13 @@ body, html {
     padding: 0;
     font-family: 'Arial', sans-serif;
     background: #f4f4f4;
-    color: #333;
+    color: #000000;
 }
 
 /* Header styles */
 header {
     background-color: #f4f4f4;
-    color: #5f3b3b;
+    color: #2d3433;
     padding: 4px 10px;
     text-align: center;
     position: fixed;
@@ -54,24 +54,24 @@ main {
 
 /* Section for buttons */
 #selectButtons {
-    margin-bottom: 15px;
-    margin-top: 15px;
+    margin-bottom: 12px;
+    margin-top: 12px;
 }
 
 /* Button styling */
 button {
-    background-color: #5f3b3b; /* Green shade */
+    background-color: #37931c; /* Green shade */
     color: white;
     border: none;
-    padding: 5px 15px;
-    margin: 0 10px;
-    border-radius: 5px;
+    padding: 6px 12px;
+    margin: 0 8px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 12px;
 }
 
 button:hover {
-    background-color: #3c7c4a; /* Darker green shade */
+    background-color: #4555a5; /* Darker green shade */
 }
 
 /* List and list item styles for sessions */
