@@ -15,6 +15,7 @@ header {
     text-align: center;
     position: fixed;
     height: 200px;
+    width: 100%;
 
 }
 
@@ -25,7 +26,6 @@ header {
     width: 80%;
     border: 1px solid #333;
     border-radius: 2px;
-    margin-left: 0px;
 }
 
 #thresholdInput {
@@ -47,6 +47,8 @@ header {
 /* Main content area */
 main {
     padding-top: 200px;
+    padding-left: 10px;
+    padding-right: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -78,6 +80,8 @@ button:hover {
 #sessionsList ul {
     list-style: none;
     padding: 0;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .session {
@@ -94,8 +98,12 @@ button:hover {
 /* Color highlights for active/inactive sessions */
 
 .session[style*="lightgreen"] {
-    background-color: #d4edda; /* Light green background for active tabs */
+    background-color: #74cf83; /* Light green background for active tabs */
     border-left: 5px solid #4ba05f; /* Green border for active tabs */
+}
+
+.session[style*="lightcoral"] {
+    border-left: 5px solid #ac4a4a; /* Green border for active tabs */
 }
 
 /* Checkbox styling */

@@ -150,11 +150,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     chrome.tabs.onUpdated.addListener(updateTabList);
     chrome.tabs.onRemoved.addListener(updateTabList);
-    chrome.tabs.onActivated.addListener(updateTabList);
 
     chrome.tabs.onActivated.addListener(function(activeInfo) {
         const tabId = activeInfo.tabId;
         lastActiveTimes[tabId] = new Date();
+        updateTabList();
     });
 
     document.getElementById('selectAllInactive').addEventListener('click', function() {
