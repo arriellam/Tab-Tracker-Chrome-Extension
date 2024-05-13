@@ -10,7 +10,7 @@ body, html {
 /* Header styles */
 header {
     background-color: #f4f4f4;
-    color: #2d3433;
+    color: #a74444;
     padding: 4px 10px;
     text-align: center;
     position: fixed;
@@ -25,7 +25,7 @@ header {
     margin-top: 15px;
     width: 80%;
     border: 1px solid #333;
-    border-radius: 2px;
+    border-radius: 6px;
 }
 
 #thresholdInput {
@@ -37,8 +37,9 @@ header {
 }
 
 #timeInput {
-    padding: 4px;
+    padding: 3px;
     margin-top: 0px;
+    margin-right: 6px;
     width: 30%;
     border: 1px solid #333;
     border-radius: 3px;
@@ -62,18 +63,19 @@ main {
 
 /* Button styling */
 button {
-    background-color: #37931c; /* Green shade */
+    background-color: #a74444; /* Green shade */
     color: white;
     border: none;
     padding: 6px 12px;
     margin: 0 8px;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 button:hover {
-    background-color: #4555a5; /* Darker green shade */
+    background-color: lightgreen; /* Darker green shade */
+    color: black;
 }
 
 /* List and list item styles for sessions */

@@ -62,6 +62,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 windowTitle.textContent = `Window ${windowCount++}`; // Sequential numbering instead of windowId
                 windowDiv.appendChild(windowTitle);
                 
+            // Sort tabs based on last active time
+            windows[windowId].sort((a, b) => {
+                const aLastActive = lastActiveTimes[a.id] || new Date(a.lastAccessed);
+                const bLastActive = lastActiveTimes[b.id] || new Date(b.lastAccessed);
+                return bLastActive.getTime() - aLastActive.getTime(); // Sort in descending order
+            });
+
                 windows[windowId].forEach(tab => {
                     const li = document.createElement('li');
                     li.className = 'session';
@@ -99,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // updated color based on time threshold
                     const minutesSinceLastAccess = calculateTimeDifference(tab);
                     if (minutesSinceLastAccess < calculateThreshold()) {
-                        li.style.backgroundColor = 'lightgreen' 
+                        li.style.backgroundColor = 'lightgreen';
                     } else {
                         li.style.backgroundColor = 'lightcoral';
                     }
