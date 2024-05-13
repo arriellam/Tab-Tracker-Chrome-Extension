@@ -11,8 +11,11 @@ body, html {
 header {
     background-color: #f4f4f4;
     color: #5f3b3b;
-    padding: 4px 20px;
+    padding: 4px 10px;
     text-align: center;
+    position: fixed;
+    height: 200px;
+
 }
 
 /* Styling for the search input box */
@@ -43,7 +46,7 @@ header {
 
 /* Main content area */
 main {
-    padding: 20px;
+    padding-top: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -51,7 +54,8 @@ main {
 
 /* Section for buttons */
 #selectButtons {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 /* Button styling */
