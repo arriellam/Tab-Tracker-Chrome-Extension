@@ -12,8 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Store checkbox states for each tab
     const checkboxStates = {}; 
     // Store last active times for each tab
-    const lastActiveTimes = {};
-    
+    const lastActiveTimes = {}; // Time threshold in minutes
+    const timeThresholdKey = 'timeThreshold';
+    const timeUnitKey = 'timeUnit';
     
 
     // Function to filter tabs based on search input
@@ -60,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const windowTitle = document.createElement('h2');
                 windowTitle.textContent = `Window ${windowCount++}`; // Sequential numbering instead of windowId
                 windowDiv.appendChild(windowTitle);
-
+                
                 windows[windowId].forEach(tab => {
                     const li = document.createElement('li');
                     li.className = 'session';
@@ -77,6 +78,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     const span = document.createElement('span');
                     span.className = 'session-name';
                     span.textContent = tab.title || 'No Title';
+                    span.href = tab.url;
+                    span.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        chrome.tabs.update(tab.id, {active: true});
+                        chrome.windows.update(tab.windowId, {focused: true});
+                    });
                     infoDiv.appendChild(span);
 
                     const idSpan = document.createElement('span');
@@ -85,21 +92,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     idSpan.style.display = 'none';
                     infoDiv.appendChild(idSpan);
 
-                    const aLink = document.createElement('a');
-                    aLink.className = 'tab-url';
-                    aLink.href = '#';
-                    const maxLength = 30;
-                    let displayUrl = tab.url.length > maxLength ? tab.url.substring(0, maxLength) + '...' : tab.url;
-                    aLink.textContent = displayUrl;
-                    aLink.addEventListener('click', function(event) {
-                        event.preventDefault();
-                        chrome.tabs.update(tab.id, {active: true});
-                    });
-                    infoDiv.appendChild(aLink);
+                    const tabURL = document.createElement('a');
+                    tabURL.className = 'tab-url';
+                    infoDiv.appendChild(tabURL);
 
                     // updated color based on time threshold
                     const minutesSinceLastAccess = calculateTimeDifference(tab);
-                    if ((minutesSinceLastAccess < 1)) {
+                    if (minutesSinceLastAccess < calculateThreshold()) {
                         li.style.backgroundColor = 'lightgreen' 
                     } else {
                         li.style.backgroundColor = 'lightcoral';
@@ -130,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // If no last active time recorded, use lassed accessed time
         const lastActiveTime = lastActiveTimes[tabId] || new Date(tab.lastAccessed);
         const timeDiff = currentTime.getTime() - lastActiveTime.getTime();
-        return Math.floor(timeDiff / (1000 * 60));
+        return Math.floor(timeDiff);
     }
 
     function getCheck() {
@@ -149,14 +148,22 @@ document.addEventListener('DOMContentLoaded', function() {
      
     continouslyUpdate();
 
+    chrome.tabs.onUpdated.addListener(updateTabList);
+    chrome.tabs.onRemoved.addListener(updateTabList);
+    chrome.tabs.onActivated.addListener(updateTabList);
+
     chrome.tabs.onActivated.addListener(function(activeInfo) {
         const tabId = activeInfo.tabId;
         lastActiveTimes[tabId] = new Date();
     });
 
     document.getElementById('selectAllInactive').addEventListener('click', function() {
-        const checkboxes = document.querySelectorAll('.session:not(:first-child) .tab-select');
-        checkboxes.forEach(checkbox => checkbox.checked = true);
+        const checkboxes = document.querySelectorAll('.session');
+        checkboxes.forEach(function(box) {
+            if (box.style.backgroundColor === 'lightcoral') {
+                box.querySelector('.tab-select').checked = true;
+            }
+        });
     });
 
     document.getElementById('deleteSelected').addEventListener('click', function() {
@@ -168,4 +175,63 @@ document.addEventListener('DOMContentLoaded', function() {
             chrome.tabs.remove(parseInt(tabID));
         });
     });
+
+
+    // Function to save data to localStorage
+    function saveDataToStorage() {
+        localStorage.setItem(timeThresholdKey, document.getElementById('thresholdInput').value);
+        localStorage.setItem(timeUnitKey, document.getElementById('timeInput').value);
+    }
+
+    // Function to load data from localStorage
+    function loadDataFromStorage() {
+        const storedThreshold = localStorage.getItem(timeThresholdKey);
+        const storedUnit = localStorage.getItem(timeUnitKey);
+
+        if (storedThreshold && storedUnit) {
+            document.getElementById('thresholdInput').value = storedThreshold;
+            document.getElementById('timeInput').value = storedUnit;
+        }
+    }
+
+    // Function to convert time to milliseconds
+    function convertToMilliseconds(time, unit) {
+        switch(unit) {
+            case 'second':
+                return time * 1000;
+            case 'minute':
+                return time * 60 * 1000;
+            case 'hour':
+                return time * 60 * 60 * 1000;
+            case 'day':
+                return time * 24 * 60 * 60 * 1000;
+            default:
+                return NaN; // Invalid unit
+        }
+    }
+
+    // Function to handle threshold calculation
+    function calculateThreshold() {
+        // Get input values
+        const thresholdInput = document.getElementById('thresholdInput');
+        const timeInput = document.getElementById('timeInput');
+
+        // Parse input values
+        const threshold = parseFloat(thresholdInput.value);
+        const unit = timeInput.value;
+
+        // Convert threshold to milliseconds
+        const thresholdInMilliseconds = convertToMilliseconds(threshold, unit);
+
+        saveDataToStorage();
+        // Output the result
+        return thresholdInMilliseconds;
+    }
+
+    // Event listener for threshold calculation
+    document.getElementById('thresholdInput').addEventListener('input', calculateThreshold);
+    document.getElementById('timeInput').addEventListener('change', calculateThreshold);
+
+    loadDataFromStorage();
+   
 });

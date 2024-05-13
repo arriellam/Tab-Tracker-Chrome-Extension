@@ -9,19 +9,36 @@ body, html {
 
 /* Header styles */
 header {
-    background-color: #007BFF;
-    color: #ffffff;
-    padding: 10px 20px;
+    background-color: #f4f4f4;
+    color: #5f3b3b;
+    padding: 4px 20px;
     text-align: center;
 }
 
 /* Styling for the search input box */
 #searchSessions {
     padding: 8px;
+    margin-top: 15px;
+    width: 80%;
+    border: 1px solid #333;
+    border-radius: 2px;
+    margin-left: 0px;
+}
+
+#thresholdInput {
+    padding: 4px;
     margin-top: 8px;
-    width: 50%;
-    border: none;
-    border-radius: 4px;
+    width: 20%;
+    border: 1px solid #333;
+    border-radius: 3px;
+}
+
+#timeInput {
+    padding: 4px;
+    margin-top: 0px;
+    width: 30%;
+    border: 1px solid #333;
+    border-radius: 3px;
 }
 
 /* Main content area */
@@ -39,18 +56,18 @@ main {
 
 /* Button styling */
 button {
-    background-color: #28a745; /* Green shade */
+    background-color: #5f3b3b; /* Green shade */
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 5px 15px;
     margin: 0 10px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 button:hover {
-    background-color: #218838; /* Darker green shade */
+    background-color: #3c7c4a; /* Darker green shade */
 }
 
 /* List and list item styles for sessions */
@@ -74,12 +91,7 @@ button:hover {
 
 .session[style*="lightgreen"] {
     background-color: #d4edda; /* Light green background for active tabs */
-    border-left: 5px solid #28a745; /* Green border for active tabs */
-}
-
-.session[style*="lightred"] {
-    background-color: #f8d7da; /* Light red background for inactive tabs */
-    border-left: 5px solid #dc3545; /* Red border for inactive tabs */
+    border-left: 5px solid #4ba05f; /* Green border for active tabs */
 }
 
 /* Checkbox styling */
@@ -96,19 +108,12 @@ button:hover {
 
 .session-name {
     flex-grow: 1;
+    cursor: pointer;
+    font-weight: 500;
 }
 
 .tab-url {
-    flex-grow: 2;
-    color: #666;  /* Dark grey color for URL */
-    white-space: normal; /* Allow wrapping */
-    word-break: break-word; /* Break the word at the limit of the container */
-    overflow: hidden; /* Hide overflow */
     display: none;  /* Hide the URL by default */
-}
-
-.session:hover .tab-url {
-    display: block;  /* Show the URL on hover */
 }
 
 .window-group {

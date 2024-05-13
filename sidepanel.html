@@ -9,7 +9,15 @@
 <body>
     <header>
         <h1>Tab Tracker</h1>
-        <input type="text" id="searchSessions" placeholder="Search sessions...">
+        <label for="thresholdInput">Inactive Threshold:</label>
+        <input type="number" min="0" value="1" id="thresholdInput" placeholder="set">
+        <select id="timeInput" value="minute" name="times">
+            <option value="second">seconds</option>
+            <option selected value="minute" >minutes</option>
+            <option value="hour">hours</option>
+            <option value="day">days</option>
+          </select>
+        <input type="text" id="searchSessions" placeholder="Search tab...">
     </header>
 
     <main>
