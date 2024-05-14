@@ -1,4 +1,10 @@
-# Chrome Tab Manager Extension
+#  Tab Tracker Chrome Extension
+
+## Description
+Many people use Chrome to accomplish a variety of tasks such as work, communications, entertainment, and social media. 
+A major problem today is that we forget to close inactive tabs when using the Internet. Moreover, when there are several
+tabs open in the browser, navigating through different sites can be tedious. TabTracker allows us to closely monitor our 
+usage of different web pages, mark out tabs for closure and allow for easy navigation between tabs and windows.
 
 ## Installation and Setup
 
@@ -40,10 +46,11 @@
 ![Video](images/demo2.gif)
 
 4. Tabs that have passed the threshold will be marked as inactive (red highlight), while the other are marked active (green highlight).
+   You can customize the threshold to however many seconds, minutes, hours or days.
    
 ![Video](images/demo3.gif)
 
-5. Try deleting individual tabs or bulk deleting tabs that have passed the threshold by clicking the "Select All Inactive" button, or manually clicking the checkbox of the tab you wish to delete.
+5. Try deleting individual tabs or bulk deleting tabs that have passed the threshold by clicking the "Select All Inactive" button, or manually clicking the checkbox of the tab you wish to delete, then click the delete button. You could always undo your selection by clicking the 'Deselect All' button.
 
 ![Video](images/demo4.gif)
 
