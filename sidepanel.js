@@ -101,6 +101,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     const tabURL = document.createElement('a');
                     tabURL.className = 'tab-url';
+                    tabURL.textContent = tab.url;
+                    tabURL.style.display = 'none';
                     infoDiv.appendChild(tabURL);
 
                     // updated color based on time threshold
@@ -125,7 +127,8 @@ document.addEventListener('DOMContentLoaded', function() {
             filterTabs(searchInput.value.toLowerCase());
         });
     }
-    
+
+    updateTabList();
     // Function to calculate time difference between current time and last accessed time
     function calculateTimeDifference(tab) {
         const tabId = tab.id;
@@ -150,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function continouslyUpdate() {
         updateTabList();
-        setTimeout(continouslyUpdate, 1000);
+        setTimeout(continouslyUpdate, 60000);
     }
      
     continouslyUpdate();
@@ -228,6 +231,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function calculateThreshold() {
         // Get input values
         const thresholdInput = document.getElementById('thresholdInput');
+        if (thresholdInput.value < 0) {
+            document.getElementById('thresholdInput').value = 1;
+            thresholdInput.value = 1;
+        }
         const timeInput = document.getElementById('timeInput');
 
         // Parse input values
@@ -243,8 +250,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Event listener for threshold calculation
-    document.getElementById('thresholdInput').addEventListener('input', calculateThreshold);
-    document.getElementById('timeInput').addEventListener('change', calculateThreshold);
+    document.getElementById('thresholdInput').addEventListener('input', updateTabList);
+    document.getElementById('timeInput').addEventListener('change', updateTabList);
 
     loadDataFromStorage();
    
