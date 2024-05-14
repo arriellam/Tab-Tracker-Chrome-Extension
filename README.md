@@ -50,3 +50,7 @@
 6. Use the search functionality to find specific tabs by URL or title.
 
 ![Video](images/demo5.gif)
+
+## Contact
+
+If you have any questions, suggestions, or feedback, feel free to contact us.
