@@ -74,8 +74,7 @@ button {
 }
 
 button:hover {
-    background-color: lightgreen; /* Darker green shade */
-    color: black;
+    background-color: #c96666; /* Darker green shade */
 }
 
 /* List and list item styles for sessions */
