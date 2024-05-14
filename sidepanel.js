@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function continouslyUpdate() {
         updateTabList();
-        setTimeout(continouslyUpdate, 60000);
+        setTimeout(continouslyUpdate, 120000);
     }
      
     continouslyUpdate();
