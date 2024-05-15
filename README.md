@@ -7,6 +7,7 @@ usage of different web pages, mark out tabs for closure and allow for easy navig
 
 Link to TabTracker Hugo Landing Page: https://mayachari622.github.io/hugo-tabtracker/
 
+
 ## Installation and Setup
 
 1. Clone this repository:
@@ -33,6 +34,8 @@ Link to TabTracker Hugo Landing Page: https://mayachari622.github.io/hugo-tabtra
 
 
 ## How to Use
+
+[Here](https://www.youtube.com/watch?v=1fN54JEVHX4) is a link to a video description.
 
 1. Open the Chrome Tab Tracker Extension by clicking the extension icon.
 
