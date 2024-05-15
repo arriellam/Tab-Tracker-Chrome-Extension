@@ -1,6 +1,5 @@
 #  Tab Tracker Chrome Extension
 
-## Description
 Many people use Chrome to accomplish a variety of tasks such as work, communications, entertainment, and social media. 
 A major problem today is that we forget to close inactive tabs when using the Internet. Moreover, when there are several
 tabs open in the browser, navigating through different sites can be tedious. TabTracker allows us to closely monitor our 
@@ -58,6 +57,14 @@ usage of different web pages, mark out tabs for closure and allow for easy navig
 
 ![Video](images/demo5.gif)
 
-## Contact
+## Authors
+- Arriella Mafuta (arriella@seas.upenn.edu)
+- Maya Chari (mchari@sas.upenn.edu)
+- Siddharth Kanderi (skanderi@seas.upenn.edu)
 
-If you have any questions, suggestions, or feedback, feel free to contact us.
+## Contributions and Suggestions
+We welcome contributions and suggestions. Please open an issue or submit a pull request with your ideas.
+
+## Licensing
+This project is licensed under the MIT-License. You can read more about the MIT license [here](https://choosealicense.com/licenses/mit/).
+
