@@ -5,7 +5,7 @@ A major problem today is that we forget to close inactive tabs when using the In
 tabs open in the browser, navigating through different sites can be tedious. TabTracker allows us to closely monitor our 
 usage of different web pages, mark out tabs for closure and allow for easy navigation between tabs and windows.
 
-Link to TabTracker Hugo Landing Page: https://mayachari622.github.io/hugo-tabtracker/
+Link to TabTracker Hugo Landing Page [here](https://arriellam.github.io/hugo-tabtracker/)
 
 
 ## Installation and Setup
