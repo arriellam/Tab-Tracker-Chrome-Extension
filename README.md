@@ -12,12 +12,12 @@ Link to TabTracker Hugo Landing Page [here](https://arriellam.github.io/hugo-tab
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/arriellam/s24-team-15.git
+   git clone https://github.com/arriellam/Tab-Tracker-Chrome-Extension.git
    ``` 
 2. Open Google Chrome and go to `chrome://extensions/`.
 3. Enable Developer mode using the toggle switch in the top right corner.
 4. Click on the "Load unpacked" button.
-5. Navigate to the directory where you cloned the repository and select the `s24-team-15` folder.
+5. Navigate to the directory where you cloned the repository and select the `Tab Tracker Chrome Extension` folder.
 6. The extension should now be installed and visible in your Chrome browser's extensions list.
 7. Make sure your sidePanel is enabled in Chrome.
 
